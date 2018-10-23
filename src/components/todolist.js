@@ -56,7 +56,12 @@ class TodoList extends Component {
 
     onFormSubmit = (e)=>{
         e.preventDefault(); // prevent Default is a fucntion to prevent submittion of form
-        console.log(this.state.currentTask);
+       
+
+    //    // A check whether user has typed some value or not - Really Really Important    
+       if(this.state.currentTask ===''){
+           return null; // simply not return anything
+       }
        const newlists = [...this.state.lists];
     
 
@@ -90,6 +95,7 @@ class TodoList extends Component {
     render() { 
         return ( 
             <section>
+                <h1 className="header">A SIMPLE DAY TO DAY TODO_APP</h1>
                 <TodoForm  
                     currentTask={this.state.currentTask}
                     handleChange = {(event)=>this.onChangeHandler(event)}

@@ -5,11 +5,11 @@ const TodoItem = (props)=>{
     return  (
         <div className="todoItemDiv">
            <li 
-            className={props.task.completed ?'completed list-group-item col-md-8':'list-group-item col-md-9'}
+            className={props.task.completed ?'completed list-group-item col-md-10':'list-group-item col-md-10'}
             onClick={()=>props.handleClick(props.task)}> {props.task.name}
             </li>
 
-            <button className="col-md-1 btn btn-primary btn-lg "onClick={()=>props.handleDelete(props.task)}>Delete</button>
+            <button className="col-md-1 btn btn-default btn-lg btn-rounded "onClick={()=>props.handleDelete(props.task)}>Delete</button>
         </div>
         );
     
