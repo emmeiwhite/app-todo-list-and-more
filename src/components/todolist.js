@@ -1,0 +1,103 @@
+import React, { Component } from 'react';
+
+import TodoItem from './todoItem';
+import TodoForm from './todoform';
+
+class TodoList extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+           lists:[
+               {id:1,name:'Buy Flour',completed:false},
+               {id:2,name:'Buy Milk',completed:false},
+               {id:3,name:'Buy Cheese',completed:false},
+               {id:4,name:'Buy Carrots',completed:false},
+           ],
+           currentTask:''
+        }
+    }
+     
+    // 1.ClickHandler
+    onClickHandle = (list)=>{
+
+        const copiedList = [...this.state.lists];
+
+        console.log(copiedList);
+
+        //  ====  Code to Delete the particular list  === //
+        // const newList = copiedList.filter(l=>l!==list);
+        
+        // this.setState({
+        //     lists:newList
+        // })
+
+        // Let's find index of current list being passed to the handler
+        const index = copiedList.indexOf(list);
+        console.log(index);
+
+        copiedList[index].completed=true;
+        // Note: Throughout we are only working with the copied array, because we must not modify the state directly
+        this.setState({
+            lists:copiedList
+        })
+    }
+
+    // 2. ChangeHandler
+
+    onChangeHandler = (newValue)=>{
+        
+        this.setState({
+            currentTask:newValue.target.value
+        })
+    }
+
+    // 3. Form SubmitHandler
+
+    onFormSubmit = (e)=>{
+        e.preventDefault(); // prevent Default is a fucntion to prevent submittion of form
+        console.log(this.state.currentTask);
+       const newlists = [...this.state.lists];
+    
+
+       newlists.push({
+           id:Math.floor(Math.random()*1000),
+           name:this.state.currentTask,
+           completed:false
+       })
+
+       this.setState({
+           lists:newlists,
+           currentTask:''
+       })
+    }
+
+    render() { 
+        return ( 
+            <section>
+                <TodoForm  
+                    currentTask={this.state.currentTask}
+                    handleChange = {(event)=>this.onChangeHandler(event)}
+                    handleSubmit = {(e)=>this.onFormSubmit(e)}
+                />
+                
+                <ul className="list-group">
+                {
+                    this.state.lists.map((list)=>{
+                        return  <TodoItem 
+                                    task={list} 
+                                    key={list.id}
+                                    handleClick = {(list)=>this.onClickHandle(list)}
+                                />;
+                    })
+                }
+                
+                </ul>
+            </section>
+           
+         
+        );
+    }
+}
+ 
+export default TodoList; // Named export 
