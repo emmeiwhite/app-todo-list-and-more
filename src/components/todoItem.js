@@ -33,9 +33,16 @@ class TodoItem extends Component{
 
     renderForm = ()=>{
         return(
-        <form onSubmit={this.props.editFormHandler}>
+        <form onSubmit={(event)=>this.props.handleEditForm(this.input.value,event)}> {/*Making use of ref*/}
             <div className="form-group col-md-10">
-                <input type="text" defaultValue={this.props.task.name} className="form-control " />
+                <input type="text" 
+                ref={
+                    (value)=>{
+                        this.input = value
+                    }
+                }
+                defaultValue={this.props.task.name} 
+                className="form-control " />
             </div>
 
             <div className="form-group col-md-2">

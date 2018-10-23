@@ -85,7 +85,11 @@ class TodoList extends Component {
     }
 
 
-    // 
+    // 5. Editing the list Item - This will happen in two steps. 
+    onEditFormHandle = (value,evt)=>{
+        evt.preventDefault();
+        console.log(value);
+    }
 
     render() { 
         return ( 
@@ -105,7 +109,9 @@ class TodoList extends Component {
                                     key={list.id}
                                     handleClick = {(list)=>this.onClickHandle(list)}
                                     handleDelete = {(list)=>this.onDeleteClickHandle(list)}
-                                    
+                                    editHandler = {(list)=>{this.onChangeEditHandler(list)}}
+                                    handleEditForm = {(value,e)=>this.onEditFormHandle(value,e)}
+
                                 />;
                     })
                 }
