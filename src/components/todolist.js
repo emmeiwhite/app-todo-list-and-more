@@ -72,6 +72,21 @@ class TodoList extends Component {
        })
     }
 
+    // 4. Deleting the list 
+    
+    onDeleteClickHandle = (list)=>{
+        
+        const copiedList = [...this.state.lists]; // For Immutability we must copy the state field
+
+        //  ====  Code to Delete the particular list  === //
+        const newList = copiedList.filter(l=>l!==list);
+        
+        this.setState({
+            lists:newList
+        })
+    }
+
+
     render() { 
         return ( 
             <section>
@@ -88,6 +103,8 @@ class TodoList extends Component {
                                     task={list} 
                                     key={list.id}
                                     handleClick = {(list)=>this.onClickHandle(list)}
+                                    handleDelete = {(list)=>this.onDeleteClickHandle(list)}
+                                    
                                 />;
                     })
                 }
