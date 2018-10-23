@@ -86,9 +86,27 @@ class TodoList extends Component {
 
 
     // 5. Editing the list Item - This will happen in two steps. 
-    onEditFormHandle = (value,evt)=>{
-        evt.preventDefault();
+    onEditFormHandle = (task,value)=>{
         console.log(value);
+        console.log(task);
+
+        const {lists} = this.state; // Copy of the state lists
+
+        console.log(lists);
+
+        const index = lists.indexOf(task);
+        console.log(index);
+
+        lists[index].name = value;
+        console.log('========================================================');
+        console.log(lists);
+        
+        this.setState({
+            lists:lists
+        })
+
+        return;
+
     }
 
     render() { 
@@ -109,9 +127,7 @@ class TodoList extends Component {
                                     key={list.id}
                                     handleClick = {(list)=>this.onClickHandle(list)}
                                     handleDelete = {(list)=>this.onDeleteClickHandle(list)}
-                                    editHandler = {(list)=>{this.onChangeEditHandler(list)}}
-                                    handleEditForm = {(value,e)=>this.onEditFormHandle(value,e)}
-
+                                    handleEditForm = {(list,newValue)=>this.onEditFormHandle(list,newValue)}
                                 />;
                     })
                 }

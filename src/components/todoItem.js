@@ -29,11 +29,28 @@ class TodoItem extends Component{
     }
 
 
-    // 2. Rendering Form to Edit List
+    // 2. Rendering Form to Edit List : Since my toggleState() method is written in this Component, I will first handle form submit here 
+    //    and use onFormSubmitEdit() function and within this handler , I will make a call to another handler function which will update our state
+    //    Earlier I did all the functionality in that handler, but got stuck in toggling state...
+
+    onFormSubmitEdit = (task,newValue,event)=>{
+        event.preventDefault();
+
+        this.props.handleEditForm(task,newValue);   
+        //  After returning we will make a call to toggleState() so that DOM reRenders. 
+      
+        this.toggleState();
+
+        // A really Nice Project Comes nearly to an End. Learned great Techniques! :) 
+        // Playing with REACT is great fun !!! 
+        // There however remains one task! If the User adds exactly the same name in the List, we must stop the User!
+        // WE WILL HAVE TO MAKE USE OF Life Cycle method for that I guess. shouldComponentUpdate(), That's what is coming to my mind right now...Let's see that soon :IA
+    }
 
     renderForm = ()=>{
+        const {task} = this.props;
         return(
-        <form onSubmit={(event)=>this.props.handleEditForm(this.input.value,event)}> {/*Making use of ref*/}
+        <form onSubmit={(event)=>this.onFormSubmitEdit(task,this.input.value,event)}> {/*Making use of ref*/}
             <div className="form-group col-md-10">
                 <input type="text" 
                 ref={
