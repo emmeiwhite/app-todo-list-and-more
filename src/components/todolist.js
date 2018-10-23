@@ -25,18 +25,11 @@ class TodoList extends Component {
 
         console.log(copiedList);
 
-        //  ====  Code to Delete the particular list  === //
-        // const newList = copiedList.filter(l=>l!==list);
-        
-        // this.setState({
-        //     lists:newList
-        // })
-
         // Let's find index of current list being passed to the handler
         const index = copiedList.indexOf(list);
         console.log(index);
 
-        copiedList[index].completed=true;
+        copiedList[index].completed=true; // this click handle is just to dynamically set the CSS of li
         // Note: Throughout we are only working with the copied array, because we must not modify the state directly
         this.setState({
             lists:copiedList
@@ -66,7 +59,7 @@ class TodoList extends Component {
     
 
        newlists.push({
-           id:Math.floor(Math.random()*1000),
+           id:Math.floor(Math.random()*10000),
            name:this.state.currentTask,
            completed:false
        })
@@ -91,6 +84,8 @@ class TodoList extends Component {
         })
     }
 
+
+    // 
 
     render() { 
         return ( 
